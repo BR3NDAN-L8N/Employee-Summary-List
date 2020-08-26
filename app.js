@@ -14,20 +14,46 @@ const Employee = require("./lib/Employee");
 const employeeArr = [];
 const currentEmployee = {
     name: '',
-    id: 1,
+    id: '',
     email: ''
 }
 
-function addIntern(res) {
-    res.school = inquirer.prompt([{
+function addIntern() {
+    inquirer.prompt([{
         type: "input",
         message: "Enter Intern's School.",
         name: "school",
-    }]).then(function(res) {
+    }]).then(function (res) {
         newIntern = new Intern(currentEmployee.name, currentEmployee.id, currentEmployee.email, res.school);
         employeeArr.push(newIntern);
-        
-    addAnotherEmployee();
+
+        addAnotherEmployee();
+    });
+}
+
+function addEngineer() {
+    inquirer.prompt([{
+        type: "input",
+        message: "Enter Engineer's Github.",
+        name: "github",
+    }]).then(function (res) {
+        newEngineer = new Engineer(currentEmployee.name, currentEmployee.id, currentEmployee.email, res.github);
+        employeeArr.push(newEngineer);
+
+        addAnotherEmployee();
+    });
+}
+
+function addManager() {
+    inquirer.prompt([{
+        type: "input",
+        message: "Enter Manager's Office Number.",
+        name: "number",
+    }]).then(function (res) {
+        newManager = new Manager(currentEmployee.name, currentEmployee.id, currentEmployee.email, res.number);
+        employeeArr.push(newManager);
+
+        addAnotherEmployee();
     });
 }
 
