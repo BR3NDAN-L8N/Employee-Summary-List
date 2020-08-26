@@ -10,7 +10,39 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+function addEmployees() {
+    inquirer.prompt([{
+                type: "input",
+                message: "What's the employee's name?",
+                name: "name",
+            },
+            {
+                type: "list",
+                message: "Which license would you like this evening?",
+                name: "license",
+                choices: [
+                    'Apache License 2.0',
+                    'The MIT License',
+                ],
+            }
+        ])
+        .then(function (response) {
 
+        });
+}
+
+function engineer(response) {
+    //ask for github via inquiere (engineerRes)
+
+    //100% of the time after all thequestions create the new instance of each obj (engineer )
+    //let newGuy= new Engineer(res,res,res,engineerRes)
+    //push him into the array
+
+    //ask if there are moreemployees
+    //run questions again addEmployees()
+    //if there are no more
+    //run the template passing in the array of objects
+}
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
