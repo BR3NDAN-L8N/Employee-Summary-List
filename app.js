@@ -70,7 +70,10 @@ function addAnotherEmployee() {
         if (res.anotherOne === "Yes") {
             addEmployee();
         } else {
-            console.log(employeeArr);
+            fs.writeFileSync(outputPath, render(employeeArr), function(err) {
+                if (err) throw err;
+            });
+            // console.log(employeeArr);
         }
     });
 }
