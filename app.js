@@ -9,52 +9,75 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
+const Employee = require("./lib/Employee");
 
-function addIntern(response) {
-    
+const employeeArr = [];
+const currentEmployee = {
+    name: '',
+    id: 1,
+    email: ''
+}
+
+function addIntern(res) {
+    res.school = inquirer.prompt([{
+        type: "input",
+        message: "Enter Intern's School.",
+        name: "school",
+    }]).then(function(res) {
+        newIntern = new Intern(currentEmployee.name, currentEmployee.id, currentEmployee.email, res.school);
+        employeeArr.push(newIntern);
+        
+    addAnotherEmployee();
+    });
+}
+
+function addAnotherEmployee() {
+    console.log(employeeArr);
 }
 
 function addEmployee() {
     inquirer.prompt([{
-                type: "input",
-                message: "Enter Employee's Name.",
-                name: "name",
-            },{
-                type: "input",
-                message: "Enter Employee's ID.",
-                name: "id",
-            },{
-                type: "input",
-                message: "Enter Employee's E-mail.",
-                name: "email",
-            },{
-                type: "list",
-                message: "Select Employee's Role.",
-                name: "role",
-                choices: [
-                    'Intern',
-                    'Engineer',
-                    'Manager'
-                ],
-            }
-        ])
-        .then(function (response) {
-            switch(response.role) {
-                case "Intern":
-                    addIntern(response);
-                    break;
-                case "Engineer":
-                    addEngineer(response);
-                    break;
-                case "Manager":
-                    addManager(response);
-                    break; 
-            }
-        });
-        addAnotherEmployee();
+        type: "input",
+        message: "Enter Employee's Name.",
+        name: "name",
+    }, {
+        type: "input",
+        message: "Enter Employee's ID.",
+        name: "id",
+    }, {
+        type: "input",
+        message: "Enter Employee's E-mail.",
+        name: "email",
+    }, {
+        type: "list",
+        message: "Select Employee's Role.",
+        name: "role",
+        choices: [
+            'Intern',
+            'Engineer',
+            'Manager'
+        ],
+    }]).then(function (res) {
+        currentEmployee.name = res.name;
+        currentEmployee.id = res.id;
+        currentEmployee.email = res.email;
+        switch (res.role) {
+            case "Intern":
+                addIntern(res);
+                break;
+            case "Engineer":
+                addEngineer(res);
+                break;
+            case "Manager":
+                addManager(res);
+                break;
+        }
+    });
 }
 
-function engineer(response) {
+addEmployee();
+
+function engineer(res) {
     //ask for github via inquiere (engineerRes)
 
     //100% of the time after all thequestions create the new instance of each obj (engineer )
