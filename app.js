@@ -58,7 +58,21 @@ function addManager() {
 }
 
 function addAnotherEmployee() {
-    console.log(employeeArr);
+    inquirer.prompt([{
+        type: "list",
+        message: "Add Another Employee?",
+        name: "anotherOne",
+        choices: [
+            'Yes',
+            'No'
+        ],
+    }]).then(function (res) {
+        if (res.anotherOne === "Yes") {
+            addEmployee();
+        } else {
+            console.log(employeeArr);
+        }
+    });
 }
 
 function addEmployee() {
