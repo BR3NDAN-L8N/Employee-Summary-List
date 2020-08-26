@@ -10,25 +10,48 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-function addEmployees() {
+function addIntern(response) {
+    
+}
+
+function addEmployee() {
     inquirer.prompt([{
                 type: "input",
-                message: "What's the employee's name?",
+                message: "Enter Employee's Name.",
                 name: "name",
-            },
-            {
+            },{
+                type: "input",
+                message: "Enter Employee's ID.",
+                name: "id",
+            },{
+                type: "input",
+                message: "Enter Employee's E-mail.",
+                name: "email",
+            },{
                 type: "list",
-                message: "Which license would you like this evening?",
-                name: "license",
+                message: "Select Employee's Role.",
+                name: "role",
                 choices: [
-                    'Apache License 2.0',
-                    'The MIT License',
+                    'Intern',
+                    'Engineer',
+                    'Manager'
                 ],
             }
         ])
         .then(function (response) {
-
+            switch(response.role) {
+                case "Intern":
+                    addIntern(response);
+                    break;
+                case "Engineer":
+                    addEngineer(response);
+                    break;
+                case "Manager":
+                    addManager(response);
+                    break; 
+            }
         });
+        addAnotherEmployee();
 }
 
 function engineer(response) {
